@@ -28,7 +28,7 @@ public class MatriceAdjacence{
         return matrix.getElementByPosition(from).getElementByPosition(to).getCost(to);
     }
 
-    public boolean setCost(int from, int to, int cost){
+    public boolean setCost(int from, int to, Integer cost){
         ListInstance<MatriceLink> listInstance = matrix.getElementByPosition(from);
         if(listInstance == null) {
             return false;
@@ -98,7 +98,7 @@ public class MatriceAdjacence{
         ListInstance<ListInstance<Integer>> subAbrInstance = new ListInstance<>();
 
         for(int i = 1; i <= size; i++) {
-            remainCalcul.addToTail(i);
+            remainCalcul.addToTail((Integer) i);
         }
 
         while(remainCalcul.size() != 0) {
@@ -115,7 +115,7 @@ public class MatriceAdjacence{
                 ListElement<MatriceLink> check_out_instance = this.matrix.getElementByPosition(abr_cur_calcul.getElement()).getHead();
                 while (check_out_instance != null) {
                     if(!check_out_instance.getElement().isCut()){
-                        Integer oppPoint = check_out_instance.getElement().getOpposite(abr_cur_calcul.getElement());
+                        Integer oppPoint = (Integer) check_out_instance.getElement().getOpposite(abr_cur_calcul.getElement());
                         if(!remainCalcul.hasValue(oppPoint)) {
                             abr.addToTail(oppPoint);
                         }
