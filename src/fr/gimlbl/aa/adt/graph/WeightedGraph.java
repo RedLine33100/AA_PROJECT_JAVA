@@ -1,9 +1,9 @@
 package fr.gimlbl.aa.adt.graph;
 
 /**
- * A graph, which consists of n vertices (numbered from 1 to n) and several edges.
+ * A weighted graph, which consists of n vertices (numbered from 1 to n) and several edges.
  */
-public interface Graph {
+public interface WeightedGraph {
     /**
      * Returns the number of vertices.
      */
