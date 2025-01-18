@@ -1,11 +1,14 @@
 package fr.gimlbl.aa.utils;
 
-public class MatriceAdjacence{
+import fr.gimlbl.aa.utils.list.ListElement;
+import fr.gimlbl.aa.utils.list.ListInstance;
+
+public class AdjacencyMatrix {
 
     private final ListInstance<ListInstance<MatriceLink>> matrix = new ListInstance<>();
     private final int size;
 
-    public MatriceAdjacence(int point) {
+    public AdjacencyMatrix(int point) {
         this.size = point;
 
         for(int i = 1; i <= size; i++) {

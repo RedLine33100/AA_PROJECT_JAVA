@@ -1,4 +1,4 @@
-package fr.gimlbl.aa.utils;
+package fr.gimlbl.aa.utils.list;
 
 public class ListInstance<T> implements List<T>{
 
