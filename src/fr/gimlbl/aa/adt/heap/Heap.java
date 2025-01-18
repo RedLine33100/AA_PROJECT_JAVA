@@ -1,6 +1,6 @@
-package fr.gimlbl.aa.utils.heap;
+package fr.gimlbl.aa.adt.heap;
 
-import fr.gimlbl.aa.utils.Pair;
+import fr.gimlbl.aa.adt.Pair;
 
 /**
  * A heap. Each node of the heap has a weight (represented as an integer) and a value (of an arbitrary type).

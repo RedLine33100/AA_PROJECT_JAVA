@@ -1,4 +1,4 @@
-package fr.gimlbl.aa.utils.list;
+package fr.gimlbl.aa.adt.list;
 
 public interface List <T>{
     int size();

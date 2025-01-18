@@ -1,6 +1,6 @@
-package fr.gimlbl.aa.utils.heap;
+package fr.gimlbl.aa.adt.heap;
 
-import fr.gimlbl.aa.utils.Pair;
+import fr.gimlbl.aa.adt.Pair;
 
 /**
  * A balanced min heap. Each node has a weight that is lower than the weight of its children.

@@ -1,7 +1,7 @@
-package fr.gimlbl.aa.utils;
+package fr.gimlbl.aa.adt;
 
-import fr.gimlbl.aa.utils.list.ListElement;
-import fr.gimlbl.aa.utils.list.ListInstance;
+import fr.gimlbl.aa.adt.list.ListElement;
+import fr.gimlbl.aa.adt.list.ListInstance;
 
 public class AdjacencyMatrix {
 

@@ -1,4 +1,4 @@
-package fr.gimlbl.aa.utils;
+package fr.gimlbl.aa.adt;
 
 class MatriceLink {
     int from;
