@@ -3,8 +3,6 @@ package fr.gimlbl.aa.adt.list;
 import fr.gimlbl.aa.adt.Compare;
 import fr.gimlbl.aa.adt.Iterator;
 
-import java.util.function.BiFunction;
-
 public interface List <T>{
     int size();
     T getElementByPosition(int position);

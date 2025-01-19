@@ -3,8 +3,6 @@ package fr.gimlbl.aa.adt.list;
 import fr.gimlbl.aa.adt.Compare;
 import fr.gimlbl.aa.adt.Iterator;
 
-import java.util.function.BiFunction;
-
 /**
  * A read-only view of a list. Each method which mutates the list throws {@link UnsupportedOperationException}.
  * @param <T> Type of data in the list
