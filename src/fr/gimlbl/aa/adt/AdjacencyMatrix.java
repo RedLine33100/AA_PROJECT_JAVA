@@ -1,89 +1,101 @@
 package fr.gimlbl.aa.adt;
 
+import fr.gimlbl.aa.adt.graph.Edge;
+import fr.gimlbl.aa.adt.graph.WeightedGraph;
+import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.ListElement;
 import fr.gimlbl.aa.adt.list.ListInstance;
 
-public class AdjacencyMatrix {
+public class AdjacencyMatrix implements WeightedGraph {
 
-    private final ListInstance<ListInstance<MatriceLink>> matrix = new ListInstance<>();
-    private final int size;
+    private final List<ListInstance<Edge>> matrix = new ListInstance<>();
+    private final List<Edge> edgeList = new ListInstance<>();
 
     public AdjacencyMatrix(int point) {
-        this.size = point;
 
-        for(int i = 1; i <= size; i++) {
-            ListInstance<MatriceLink> listInstance = new ListInstance<>();
-            for(int j = 1; j <= size; j++){
+        for(int i = 1; i <= point; i++) {
+            ListInstance<Edge> listInstance = new ListInstance<>();
+            for(int j = 1; j <= point; j++){
                 listInstance.addToTail(null);
             }
             matrix.addToTail(listInstance);
         }
-        for(int i = 1; i <= size; i++) {
-            for(int j = i; j <= size; j++){
-                MatriceLink matriceLink = new MatriceLink(i, j);
-                matrix.getElementByPosition(i).updateElementByPosition(matriceLink, j);
-                matrix.getElementByPosition(j).updateElementByPosition(matriceLink, i);
+        for(int i = 1; i <= point; i++) {
+            for(int j = i; j <= point; j++){
+                Edge edge = new Edge(i,j, -1);
+                matrix.getElementByPosition(i).updateElementByPosition(edge, j);
+                matrix.getElementByPosition(j).updateElementByPosition(edge, i);
+                this.edgeList.addToTail(edge);
             }
         }
     }
 
-    public Integer getCost(int from, int to){
-        return matrix.getElementByPosition(from).getElementByPosition(to).getCost(to);
+    @Override
+    public int vertexCount() {
+        return matrix.size();
     }
 
-    public boolean setCost(int from, int to, Integer cost){
-        ListInstance<MatriceLink> listInstance = matrix.getElementByPosition(from);
-        if(listInstance == null) {
-            return false;
+    @Override
+    public List<Edge> getEdges() {
+        List<Edge> edges = new ListInstance<>();
+        ListElement<Edge> curHead = this.edgeList.getHead();
+        while (curHead != null) {
+            if(curHead.getElement().getWeight() != -1)
+                edges.addToTail(curHead.getElement());
+            curHead = curHead.getNext();
         }
-        MatriceLink matriceLink = listInstance.getElementByPosition(to);
+        return edges;
+    }
+
+    @Override
+    public int edgeCount() {
+        return getEdges().size();
+    }
+
+    @Override
+    public int edgeWeight(int from, int to){
+        return matrix.getElementByPosition(from).getElementByPosition(to).getWeight();
+    }
+
+    @Override
+    public void addEdge(int from, int to, int cost){
+        ListInstance<Edge> listInstance = matrix.getElementByPosition(from);
+        if(listInstance == null) {
+            return;
+        }
+        Edge matriceLink = listInstance.getElementByPosition(to);
         if(matriceLink == null) {
-            return false;
+            return ;
         }
-        matriceLink.setCost(to, cost);
-        return true;
+        matriceLink.setWeight(cost);
+        return;
     }
 
-    public int getOutDegree(int from){
-        ListInstance<MatriceLink> listInstance = matrix.getElementByPosition(from);
-        if(listInstance == null) {
-            return -1;
-        }
-        int outDegree = 0;
-        int count = 1;
-        ListElement<MatriceLink> outElement = listInstance.getHead();
-        while(outElement != null) {
-            if(outElement.getElement().getCost(count) != null) {
-                outDegree++;
-            }
-            outElement = outElement.getNext();
-            count++;
-        }
-        return outDegree;
-    }
+    @Override
+    public List<Edge> getIncidentEdges(int from){
+        List<Edge> incidentEdges = new ListInstance<>();
 
-    public int getInDegree(int to){
-        ListInstance<MatriceLink> listInstance = matrix.getElementByPosition(to);
+        ListInstance<Edge> listInstance = matrix.getElementByPosition(from);
         if(listInstance == null) {
-            return -1;
+            return incidentEdges;
         }
-        int inDegree = 0;
-        ListElement<MatriceLink> outElement = listInstance.getHead();
+
+        ListElement<Edge> outElement = listInstance.getHead();
         while(outElement != null) {
-            if(outElement.getElement().getCost(to) != null) {
-                inDegree++;
+            if(outElement.getElement().getWeight() != -1) {
+                incidentEdges.addToTail(outElement.getElement());
             }
             outElement = outElement.getNext();
         }
-        return inDegree;
+        return incidentEdges;
     }
 
     public boolean isConnexe(){
-        ListElement<ListInstance<MatriceLink>> listElement = matrix.getHead();
+        ListElement<ListInstance<Edge>> listElement = matrix.getHead();
         while(listElement != null) {
-            ListElement<MatriceLink> mE = listElement.getElement().getHead();
+            ListElement<Edge> mE = listElement.getElement().getHead();
             while(mE != null) {
-                if(mE.getElement().isCut())
+                if(mE.getElement().getWeight() == -1)
                     return false;
                 mE = mE.getNext();
             }
@@ -100,7 +112,7 @@ public class AdjacencyMatrix {
         ListInstance<Integer> remainCalcul = new ListInstance<>();
         ListInstance<ListInstance<Integer>> subAbrInstance = new ListInstance<>();
 
-        for(int i = 1; i <= size; i++) {
+        for(int i = 1; i <= this.matrix.size(); i++) {
             remainCalcul.addToTail((Integer) i);
         }
 
@@ -115,13 +127,10 @@ public class AdjacencyMatrix {
 
                 // Ici on vas chercher les OUT et IN et on vas les ajouter en tail de abr et les retirer de remainCalcul
 
-                ListElement<MatriceLink> check_out_instance = this.matrix.getElementByPosition(abr_cur_calcul.getElement()).getHead();
+                ListElement<Edge> check_out_instance = this.matrix.getElementByPosition(abr_cur_calcul.getElement()).getHead();
                 while (check_out_instance != null) {
-                    if(!check_out_instance.getElement().isCut()){
-                        Integer oppPoint = (Integer) check_out_instance.getElement().getOpposite(abr_cur_calcul.getElement());
-                        if(!remainCalcul.hasValue(oppPoint)) {
-                            abr.addToTail(oppPoint);
-                        }
+                    if(check_out_instance.getElement().getWeight() != -1){
+                            abr.addToTail(check_out_instance.getElement().getOppositeVertex(abr_cur_calcul.getElement()));
                     }
                     check_out_instance = check_out_instance.getNext();
                 }

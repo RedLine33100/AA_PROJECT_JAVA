@@ -8,7 +8,7 @@ import fr.gimlbl.aa.adt.Pair;
 public class Edge {
     private final int vertex1;
     private final int vertex2;
-    private final int weight;
+    private int weight;
 
     /**
      * Create an edge incident to given vertices (which must be different), and with the given weight.
@@ -49,5 +49,23 @@ public class Edge {
      */
     public int getWeight() {
         return weight;
+    }
+
+    /**
+     * Return the other Vertex
+     */
+
+    public int getOppositeVertex(int vertex1){
+        if(vertex1 == this.vertex2)
+            return this.vertex1;
+        return this.vertex2;
+    }
+
+    /**
+     * Change the Edge Weight
+     */
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }

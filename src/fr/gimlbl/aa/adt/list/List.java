@@ -13,4 +13,7 @@ public interface List <T>{
     boolean removeElement(T element);
     boolean removeElementByPosition(int position);
     Iterator<T> iterator();
+    ListElement<T> getHead();
+
+    ListElement<T> getTail();
 }

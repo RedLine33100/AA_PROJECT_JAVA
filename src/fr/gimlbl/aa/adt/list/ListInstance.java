@@ -12,10 +12,12 @@ public class ListInstance<T> implements List<T>{
         return this.size;
     }
 
+    @Override
     public ListElement<T> getHead() {
         return head;
     }
 
+    @Override
     public ListElement<T> getTail() {
         return tail;
     }
