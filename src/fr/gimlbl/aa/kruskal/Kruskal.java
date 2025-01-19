@@ -10,13 +10,14 @@ import fr.gimlbl.aa.adt.list.LinkedList;
 
 public class Kruskal {
 
-    public static <G extends WeightedGraph> void kruskal(G graph, GraphBuilder<G> graphBuilder) {
-        List<Edge> edges = graph.getEdges(); // All edges in given graph
+    public static <G extends WeightedGraph> void kruskal(G graph, GraphBuilder<G> graphBuilder, int startVertex) {
+
+        List<Edge> edges = graph.getEdges(); // All edges in given subgraph
 
         // Sorting edges
         List<Edge> orderedEdges = new LinkedList<>();
         {
-            Compare<Edge, Edge> compare = (a, b) -> a.getWeight() < b.getWeight();
+            Compare<Edge, Edge> compare = (a, b) -> a.getWeight() > b.getWeight();
             Iterator<Edge> edgesIterator = edges.iterator();
             while (edgesIterator.hasNext()) {
                 orderedEdges.addElement(edgesIterator.next(), compare); // List already allow to sort at insertion
@@ -54,6 +55,7 @@ public class Kruskal {
                 totalWeight += e.getWeight();
             }
         }
+        System.out.println(totalWeight);
     }
 
 }
