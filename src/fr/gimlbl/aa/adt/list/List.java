@@ -1,5 +1,7 @@
 package fr.gimlbl.aa.adt.list;
 
+import fr.gimlbl.aa.adt.Iterator;
+
 public interface List <T>{
     int size();
     T getElementByPosition(int position);
@@ -10,4 +12,5 @@ public interface List <T>{
     boolean hasValue(T element);
     boolean removeElement(T element);
     boolean removeElementByPosition(int position);
+    Iterator<T> iterator();
 }

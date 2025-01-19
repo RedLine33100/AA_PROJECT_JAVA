@@ -1,5 +1,7 @@
 package fr.gimlbl.aa.adt.list;
 
+import fr.gimlbl.aa.adt.Iterator;
+
 /**
  * A read-only view of a list. Each method which mutates the list throws {@link UnsupportedOperationException}.
  * @param <T> Type of data in the list
@@ -57,5 +59,10 @@ public class ReadonlyList<T> implements List<T> {
     @Override
     public boolean removeElementByPosition(int position) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return list.iterator();
     }
 }

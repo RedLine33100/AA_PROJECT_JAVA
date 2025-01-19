@@ -1,5 +1,7 @@
 package fr.gimlbl.aa.adt.list;
 
+import fr.gimlbl.aa.adt.Iterator;
+
 public class ListInstance<T> implements List<T>{
 
     private ListElement<T> head;
@@ -158,6 +160,11 @@ public class ListInstance<T> implements List<T>{
     }
 
     @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator<>(this);
+    }
+
+    @Override
     public String toString() {
         ListElement<T> current = this.head;
         StringBuilder sb = new StringBuilder();
@@ -170,4 +177,23 @@ public class ListInstance<T> implements List<T>{
         return sb.toString();
     }
 
+    private static class LinkedListIterator<T> implements Iterator<T> {
+        private ListElement<T> current;
+
+        public LinkedListIterator(ListInstance<T> list) {
+            current = list.getHead();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T result = current.getElement();
+            current = current.getNext();
+            return result;
+        }
+    }
 }
