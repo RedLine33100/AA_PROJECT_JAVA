@@ -2,7 +2,7 @@ package fr.gimlbl.aa.adt.graph;
 
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.list.List;
-import fr.gimlbl.aa.adt.list.ListInstance;
+import fr.gimlbl.aa.adt.list.LinkedList;
 
 /**
  * A weighted graph, which consists of n vertices (numbered from 1 to n) and several edges.
@@ -48,8 +48,8 @@ public abstract class WeightedGraph {
     }
 
     public List<List<Integer>> getSubConnexeAbr(){
-        List<Integer> remainCalcul = new ListInstance<>();
-        List<List<Integer>> subAbrInstance = new ListInstance<>();
+        List<Integer> remainCalcul = new LinkedList<>();
+        List<List<Integer>> subAbrInstance = new LinkedList<>();
 
         for(int i = 1; i <= this.vertexCount(); i++) {
             remainCalcul.addToTail(i);

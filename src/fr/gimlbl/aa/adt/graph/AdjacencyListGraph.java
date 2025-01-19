@@ -2,7 +2,7 @@ package fr.gimlbl.aa.adt.graph;
 
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.list.List;
-import fr.gimlbl.aa.adt.list.ListInstance;
+import fr.gimlbl.aa.adt.list.LinkedList;
 import fr.gimlbl.aa.adt.list.ReadonlyList;
 
 public class AdjacencyListGraph extends WeightedGraph {
@@ -19,9 +19,9 @@ public class AdjacencyListGraph extends WeightedGraph {
     public AdjacencyListGraph(int vertexCount) {
         this.vertexCount = vertexCount;
 
-        adjacencyList = new ListInstance<>();
+        adjacencyList = new LinkedList<>();
         for (int i = 1; i <= vertexCount; i++) {
-            adjacencyList.addToTail(new ListInstance<>());
+            adjacencyList.addToTail(new LinkedList<>());
         }
     }
 
@@ -54,7 +54,7 @@ public class AdjacencyListGraph extends WeightedGraph {
 
     @Override
     public List<Edge> getEdges() {
-        List<Edge> edges = new ListInstance<>();
+        List<Edge> edges = new LinkedList<>();
 
         Iterator<List<Edge>> iterator = adjacencyList.iterator();
         int i = 1;
@@ -104,11 +104,11 @@ public class AdjacencyListGraph extends WeightedGraph {
 
     @Override
     public List<Integer> calculateAbrFromVertex(int vertex) {
-        List<Integer> result = new ListInstance<>();
+        List<Integer> result = new LinkedList<>();
 
-        List<Boolean> inConnectedComponent = new ListInstance<>();
-        List<Integer> toVisit = new ListInstance<>();
-        List<Boolean> visited = new ListInstance<>();
+        List<Boolean> inConnectedComponent = new LinkedList<>();
+        List<Integer> toVisit = new LinkedList<>();
+        List<Boolean> visited = new LinkedList<>();
 
         for (int i = 1; i <= vertexCount; i++) {
             inConnectedComponent.addToTail(false);

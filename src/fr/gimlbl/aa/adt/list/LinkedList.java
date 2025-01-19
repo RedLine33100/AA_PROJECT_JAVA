@@ -5,7 +5,7 @@ import fr.gimlbl.aa.adt.Iterator;
 
 import java.util.NoSuchElementException;
 
-public class ListInstance<T> implements List<T>{
+public class LinkedList<T> implements List<T>{
 
     private ListElement<T> head;
     private ListElement<T> tail;
@@ -38,6 +38,36 @@ public class ListInstance<T> implements List<T>{
             i++;
         }
         return current;
+    }
+
+    private void removeElement(ListElement<T> current){
+        this.size--;
+
+        if(current.getPrevious() != null){
+            current.getPrevious().setNext(current.getNext());
+        }else this.head = current.getNext();
+
+        if(current.getNext() != null){
+            current.getNext().setPrevious(current.getPrevious());
+        }else this.tail = current.getPrevious();
+    }
+
+    private void addElementBefore(ListElement<T> current, T element){
+
+        ListElement<T> newElement = new ListElement<>(element);
+        ListElement<T> beforeAll = current.getPrevious();
+
+        if(beforeAll == null){
+            addToHead(element);
+            return;
+        }
+
+        beforeAll.setNext(newElement);
+        newElement.setPrevious(beforeAll);
+        newElement.setNext(current);
+        current.setPrevious(newElement);
+        size++;
+
     }
 
     @Override
@@ -123,18 +153,6 @@ public class ListInstance<T> implements List<T>{
         return getElement(element) != null;
     }
 
-    private void removeElement(ListElement<T> current){
-        this.size--;
-
-        if(current.getPrevious() != null){
-            current.getPrevious().setNext(current.getNext());
-        }else this.head = current.getNext();
-
-        if(current.getNext() != null){
-            current.getNext().setPrevious(current.getPrevious());
-        }else this.tail = current.getPrevious();
-    }
-
     @Override
     public boolean removeElement(T element){
         ListElement<T> current = this.getElement(element);
@@ -145,6 +163,7 @@ public class ListInstance<T> implements List<T>{
         return true;
     }
 
+    @Override
     public boolean removeElementByPosition(int position){
         ListElement<T> current = this.getElementByPositionInternal(position);
         if(current == null)
@@ -175,13 +194,11 @@ public class ListInstance<T> implements List<T>{
     @Override
     public void addElement(T element, Compare<T, T> comparator){
         ListElement<T> current = this.head;
-        int pos = 1;
         while(current != null){
             if(!comparator.compare(element, current.getElement())){
-                this.addElementByPosition(element, pos);
+                this.addElementBefore(current, element);
                 return;
             }
-            pos++;
             current = current.getNext();
         }
         this.addToTail(element);
@@ -189,7 +206,7 @@ public class ListInstance<T> implements List<T>{
 
     @Override
     public List<T> clone(){
-        List<T> newList = new ListInstance<>();
+        List<T> newList = new LinkedList<>();
         Iterator<T> iterator = this.iterator();
         while(iterator.hasNext()){
             newList.addToTail(iterator.next());
@@ -201,7 +218,7 @@ public class ListInstance<T> implements List<T>{
         private ListElement<T> current;
         private ListElement<T> previous;
 
-        public LinkedListIterator(ListInstance<T> list) {
+        public LinkedListIterator(LinkedList<T> list) {
             current = list.head;
             previous = current;
         }

@@ -6,7 +6,7 @@ import fr.gimlbl.aa.adt.graph.AdjacencyMatrixGraph;
 import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.graph.WeightedGraph;
 import fr.gimlbl.aa.adt.list.List;
-import fr.gimlbl.aa.adt.list.ListInstance;
+import fr.gimlbl.aa.adt.list.LinkedList;
 
 import java.io.IOException;
 
@@ -16,18 +16,18 @@ public class KruskalM {
     public KruskalM(String[] args) throws IOException {
         AdjacencyMatrixGraph adjacencyMatrixGraph = GraphParser.parse(args[0], new AdjacencyMatrixGraph.Builder());
 
-        List<Pair<List<Integer>, Integer>> listKruskal = new ListInstance<>();
+        List<Pair<List<Integer>, Integer>> listKruskal = new LinkedList<>();
 
         int count1 = 1;
         if (adjacencyMatrixGraph.isConnexe()) {
-            listKruskal.addToTail(this.kruskalOnVertex(adjacencyMatrixGraph, new ListInstance<>(), adjacencyMatrixGraph.vertexCount(), Integer.parseInt(args[1]), 0));
+            listKruskal.addToTail(this.kruskalOnVertex(adjacencyMatrixGraph, new LinkedList<>(), adjacencyMatrixGraph.vertexCount(), Integer.parseInt(args[1]), 0));
         }else{
             List<List<Integer>> listList = adjacencyMatrixGraph.getSubConnexeAbr();
             Iterator<List<Integer>> iterator = listList.iterator();
             while(iterator.hasNext()){
                 List<Integer> list = iterator.next();
                 System.out.println("ABR: "+count1+": "+list);
-                listKruskal.addToTail(this.kruskalOnVertex(adjacencyMatrixGraph, new ListInstance<>(), list.size(), list.getElementByPosition(1), 0));
+                listKruskal.addToTail(this.kruskalOnVertex(adjacencyMatrixGraph, new LinkedList<>(), list.size(), list.getElementByPosition(1), 0));
                 count1++;
             }
         }
