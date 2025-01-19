@@ -6,7 +6,7 @@ import fr.gimlbl.aa.adt.list.ListInstance;
 
 import java.util.function.BiFunction;
 
-public class AdjacencyMatrixGraph implements WeightedGraph {
+public class AdjacencyMatrixGraph extends WeightedGraph {
 
     private final List<List<Edge>> matrix = new ListInstance<>();
     private final List<Edge> edgeList = new ListInstance<>();
@@ -29,7 +29,7 @@ public class AdjacencyMatrixGraph implements WeightedGraph {
         }
         for(int i = 1; i <= point; i++) {
             for(int j = i; j <= point; j++){
-                Edge edge = new Edge(i,j, -1);
+                Edge edge = new Edge(i,j, Integer.MAX_VALUE);
                 matrix.getElementByPosition(i).updateElementByPosition(edge, j);
                 matrix.getElementByPosition(j).updateElementByPosition(edge, i);
                 this.edgeList.addToTail(edge);
@@ -48,7 +48,7 @@ public class AdjacencyMatrixGraph implements WeightedGraph {
         Iterator<Edge> edgeIterator = this.edgeList.iterator();
         while (edgeIterator.hasNext()) {
             Edge currentElement = edgeIterator.next();
-            if(currentElement.getWeight() != -1)
+            if(currentElement.getWeight() != Integer.MAX_VALUE)
                 edges.addToTail(currentElement);
         }
         return edges;
@@ -91,19 +91,15 @@ public class AdjacencyMatrixGraph implements WeightedGraph {
         Iterator<Edge> edgeIterator = listInstance.iterator();
         while(edgeIterator.hasNext()) {
             Edge outElement = edgeIterator.next();
-            if(outElement.getWeight() != -1) {
+            if(outElement.getWeight() != Integer.MAX_VALUE) {
                 incidentEdges.addElement(outElement, biFunction);
             }
         }
         return incidentEdges;
     }
 
-    public boolean isConnexe(){
-        int connexeSize = calculateAbrFrom(1).size();
-        return connexeSize == vertexCount();
-    }
-
-    public List<Integer> calculateAbrFrom(int startVertex){
+    @Override
+    public List<Integer> calculateAbrFromVertex(int startVertex){
         List<Integer> abrPoint = new ListInstance<>();
         abrPoint.addToTail(startVertex);
         Iterator<Integer> pointIterator = abrPoint.iterator();
@@ -115,7 +111,7 @@ public class AdjacencyMatrixGraph implements WeightedGraph {
             while(edgeIterator.hasNext()) {
                 Edge edge = edgeIterator.next();
                 int vertexOpposite = edge.getOppositeVertex(vertexPoint);
-                if(edge.getWeight() != -1) {
+                if(edge.getWeight() != Integer.MAX_VALUE) {
                     if(!abrPoint.hasValue(vertexOpposite)) {
                         abrPoint.addToTail(vertexOpposite);
                     }
@@ -124,38 +120,6 @@ public class AdjacencyMatrixGraph implements WeightedGraph {
         }
 
         return abrPoint;
-    }
-
-    /**
-     *
-     * @return List of List of point in abr
-     */
-    public List<List<Integer>> getSubConnexeAbr(){
-        List<Integer> remainCalcul = new ListInstance<>();
-        List<List<Integer>> subAbrInstance = new ListInstance<>();
-
-        for(int i = 1; i <= this.matrix.size(); i++) {
-            remainCalcul.addToTail(i);
-        }
-
-        while(remainCalcul.size() != 0) {
-
-            int vertex = remainCalcul.getElementByPosition(1);
-            remainCalcul.removeElementByPosition(1);
-            List<Integer> pointInAbr = calculateAbrFrom(vertex);
-
-
-
-            subAbrInstance.addToTail(pointInAbr);
-
-            Iterator<Integer> pointIterator = pointInAbr.iterator();
-            while(pointIterator.hasNext()) {
-                remainCalcul.removeElement(pointIterator.next());
-            }
-
-        }
-
-        return subAbrInstance;
     }
 
 }
