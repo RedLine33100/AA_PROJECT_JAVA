@@ -6,42 +6,42 @@ import fr.gimlbl.aa.adt.Pair;
  * An undirected edge, with a weight.
  */
 public class Edge {
-    private final int from;
-    private final int to;
+    private final int vertex1;
+    private final int vertex2;
     private final int weight;
 
     /**
      * Create an edge incident to given vertices (which must be different), and with the given weight.
      */
-    public Edge(int from, int to, int weight) {
-        if (from == to || from < 1 || to < 1) {
+    public Edge(int vertex1, int vertex2, int weight) {
+        if (vertex1 == vertex2 || vertex1 < 1 || vertex2 < 1) {
             throw new IllegalArgumentException("Les nœuds incidents doivent être différents et supérieurs à 0.");
         }
 
-        this.from = Math.min(from, to);
-        this.to = Math.max(from, to);
+        this.vertex1 = Math.min(vertex1, vertex2);
+        this.vertex2 = Math.max(vertex1, vertex2);
         this.weight = weight;
     }
 
     /**
-     * Returns first incident vertex. {@code getFrom()} returns a value lower than {@link #getTo()}.
+     * Returns first incident vertex. {@code getVertex1()} returns a value lower than {@link #getVertex2()}.
      */
-    public int getFrom() {
-        return from;
+    public int getVertex1() {
+        return vertex1;
     }
 
     /**
-     * Returns second incident vertex. {@code getTo()} returns a value higher than {@link #getFrom()}.
+     * Returns second incident vertex. {@code getVertex2()} returns a value higher than {@link #getVertex1()}.
      */
-    public int getTo() {
-        return to;
+    public int getVertex2() {
+        return vertex2;
     }
 
     /**
      * Returns incident vertices. The first one is lower than the second.
      */
     public Pair<Integer, Integer> getVertices() {
-        return new Pair<>(from, to);
+        return new Pair<>(vertex1, vertex2);
     }
 
     /**
