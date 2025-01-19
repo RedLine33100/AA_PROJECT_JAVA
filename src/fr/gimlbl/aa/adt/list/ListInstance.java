@@ -2,6 +2,8 @@ package fr.gimlbl.aa.adt.list;
 
 import fr.gimlbl.aa.adt.Iterator;
 
+import java.util.NoSuchElementException;
+
 public class ListInstance<T> implements List<T>{
 
     private ListElement<T> head;
@@ -192,7 +194,11 @@ public class ListInstance<T> implements List<T>{
         }
 
         @Override
-        public T next() {
+        public T next() throws NoSuchElementException {
+            if (current == null) {
+                throw new NoSuchElementException();
+            }
+
             T result = current.getElement();
             current = current.getNext();
             return result;
