@@ -165,7 +165,7 @@ public class ListInstance<T> implements List<T>{
         StringBuilder sb = new StringBuilder();
         int count = 1;
         while(current != null){
-            sb.append(count).append(") ").append(current.getElement());
+            sb.append("Element ").append(count).append(") ").append(current.getElement()).append(" ");
             current = current.getNext();
             count++;
         }
@@ -184,27 +184,44 @@ public class ListInstance<T> implements List<T>{
             pos++;
             current = current.getNext();
         }
+        this.addToTail(element);
+    }
+
+    @Override
+    public List<T> clone(){
+        List<T> newList = new ListInstance<>();
+        Iterator<T> iterator = this.iterator();
+        while(iterator.hasNext()){
+            newList.addToTail(iterator.next());
+        }
+        return newList;
     }
 
     private static class LinkedListIterator<T> implements Iterator<T> {
         private ListElement<T> current;
+        private ListElement<T> previous;
 
         public LinkedListIterator(ListInstance<T> list) {
             current = list.head;
+            previous = current;
         }
 
         @Override
         public boolean hasNext() {
-            return current != null;
+            return current != null || previous.getNext() != null;
         }
 
         @Override
         public T next() throws NoSuchElementException {
             if (current == null) {
-                throw new NoSuchElementException();
+                if(previous.getNext() == null){
+                    throw new NoSuchElementException();
+                }
+                current = previous.getNext();
             }
 
             T result = current.getElement();
+            previous = current;
             current = current.getNext();
             return result;
         }

@@ -72,4 +72,9 @@ public class ReadonlyList<T> implements List<T> {
     public void addElement(T element, BiFunction<T, T, Boolean> comparator) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public List<T> clone(){
+        return new ReadonlyList<>(list);
+    }
 }

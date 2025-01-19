@@ -14,7 +14,7 @@ public class Edge {
      * Create an edge incident to given vertices (which must be different), and with the given weight.
      */
     public Edge(int vertex1, int vertex2, int weight) {
-        if (vertex1 == vertex2 || vertex1 < 1 || vertex2 < 1) {
+        if (vertex1 < 1 || vertex2 < 1) {
             throw new IllegalArgumentException("Les nœuds incidents doivent être différents et supérieurs à 0.");
         }
 
@@ -56,9 +56,9 @@ public class Edge {
      */
 
     public int getOppositeVertex(int vertex1){
-        if(vertex1 == this.vertex2)
-            return this.vertex1;
-        return this.vertex2;
+        if(vertex1 == this.vertex1)
+            return this.vertex2;
+        return this.vertex1;
     }
 
     /**

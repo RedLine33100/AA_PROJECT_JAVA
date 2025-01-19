@@ -17,4 +17,5 @@ public interface List <T>{
     boolean removeElementByPosition(int position);
     Iterator<T> iterator();
 
+    List<T> clone();
 }
