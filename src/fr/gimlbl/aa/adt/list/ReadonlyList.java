@@ -65,4 +65,14 @@ public class ReadonlyList<T> implements List<T> {
     public Iterator<T> iterator() {
         return list.iterator();
     }
+
+    @Override
+    public ListElement<T> getHead() {
+        return list.getHead();
+    }
+
+    @Override
+    public ListElement<T> getTail() {
+        return list.getTail();
+    }
 }
