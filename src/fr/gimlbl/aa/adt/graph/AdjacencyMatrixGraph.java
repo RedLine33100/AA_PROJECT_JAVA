@@ -1,10 +1,9 @@
 package fr.gimlbl.aa.adt.graph;
 
+import fr.gimlbl.aa.adt.Compare;
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.ListInstance;
-
-import java.util.function.BiFunction;
 
 public class AdjacencyMatrixGraph extends WeightedGraph {
 
@@ -87,7 +86,7 @@ public class AdjacencyMatrixGraph extends WeightedGraph {
         }
 
 
-        BiFunction<Edge, Edge, Boolean> biFunction = (edge1, edge2) -> edge1.getWeight() > edge2.getWeight();
+        Compare<Edge, Edge> biFunction = (edge1, edge2) -> edge1.getWeight() > edge2.getWeight();
         Iterator<Edge> edgeIterator = listInstance.iterator();
         while(edgeIterator.hasNext()) {
             Edge outElement = edgeIterator.next();

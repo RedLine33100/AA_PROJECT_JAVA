@@ -1,5 +1,6 @@
 package fr.gimlbl.aa.adt.list;
 
+import fr.gimlbl.aa.adt.Compare;
 import fr.gimlbl.aa.adt.Iterator;
 
 import java.util.function.BiFunction;
@@ -69,7 +70,7 @@ public class ReadonlyList<T> implements List<T> {
     }
 
     @Override
-    public void addElement(T element, BiFunction<T, T, Boolean> comparator) throws UnsupportedOperationException {
+    public void addElement(T element, Compare<T, T> comparator) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 

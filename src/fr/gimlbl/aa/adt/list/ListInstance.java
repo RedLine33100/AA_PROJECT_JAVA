@@ -1,9 +1,9 @@
 package fr.gimlbl.aa.adt.list;
 
+import fr.gimlbl.aa.adt.Compare;
 import fr.gimlbl.aa.adt.Iterator;
 
 import java.util.NoSuchElementException;
-import java.util.function.BiFunction;
 
 public class ListInstance<T> implements List<T>{
 
@@ -173,11 +173,11 @@ public class ListInstance<T> implements List<T>{
     }
 
     @Override
-    public void addElement(T element, BiFunction<T, T, Boolean> comparator){
+    public void addElement(T element, Compare<T, T> comparator){
         ListElement<T> current = this.head;
         int pos = 1;
         while(current != null){
-            if(!comparator.apply(element, current.getElement())){
+            if(!comparator.compare(element, current.getElement())){
                 this.addElementByPosition(element, pos);
                 return;
             }
