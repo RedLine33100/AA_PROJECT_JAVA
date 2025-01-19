@@ -1,8 +1,13 @@
 package fr.gimlbl.aa.adt;
 
+/**
+ * A pair of elements.
+ * @param <T> Type of the first element
+ * @param <U> Type of the second element
+ */
 public class Pair<T, U> {
-    private T first;
-    private U second;
+    private final T first;
+    private final U second;
 
     public Pair(T first, U second) {
         this.first = first;
@@ -13,15 +18,7 @@ public class Pair<T, U> {
         return first;
     }
 
-    public void setFirst(T first) {
-        this.first = first;
-    }
-
     public U getSecond() {
         return second;
-    }
-
-    public void setSecond(U second) {
-        this.second = second;
     }
 }
