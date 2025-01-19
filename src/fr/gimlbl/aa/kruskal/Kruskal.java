@@ -46,7 +46,7 @@ public class Kruskal {
                 // Replace all occurrences of maxParent by minParent
                 for (int x = 1; x <= graph.vertexCount(); x++) {
                     if (parent.getElementByPosition(x) == maxParent) {
-                        parent.updateElementByPosition(x, minParent);
+                        parent.updateElementByPosition(minParent, x);
                     }
                 }
 
