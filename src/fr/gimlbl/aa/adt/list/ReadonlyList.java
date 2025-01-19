@@ -2,6 +2,8 @@ package fr.gimlbl.aa.adt.list;
 
 import fr.gimlbl.aa.adt.Iterator;
 
+import java.util.function.BiFunction;
+
 /**
  * A read-only view of a list. Each method which mutates the list throws {@link UnsupportedOperationException}.
  * @param <T> Type of data in the list
@@ -67,12 +69,7 @@ public class ReadonlyList<T> implements List<T> {
     }
 
     @Override
-    public ListElement<T> getHead() {
-        return list.getHead();
-    }
-
-    @Override
-    public ListElement<T> getTail() {
-        return list.getTail();
+    public void addElement(T element, BiFunction<T, T, Boolean> comparator) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 }

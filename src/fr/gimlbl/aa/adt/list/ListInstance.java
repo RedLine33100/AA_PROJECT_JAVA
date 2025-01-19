@@ -3,6 +3,7 @@ package fr.gimlbl.aa.adt.list;
 import fr.gimlbl.aa.adt.Iterator;
 
 import java.util.NoSuchElementException;
+import java.util.function.BiFunction;
 
 public class ListInstance<T> implements List<T>{
 
@@ -12,16 +13,6 @@ public class ListInstance<T> implements List<T>{
 
     public int size() {
         return this.size;
-    }
-
-    @Override
-    public ListElement<T> getHead() {
-        return head;
-    }
-
-    @Override
-    public ListElement<T> getTail() {
-        return tail;
     }
 
     private ListElement<T> getElement(T element){
@@ -181,11 +172,25 @@ public class ListInstance<T> implements List<T>{
         return sb.toString();
     }
 
+    @Override
+    public void addElement(T element, BiFunction<T, T, Boolean> comparator){
+        ListElement<T> current = this.head;
+        int pos = 1;
+        while(current != null){
+            if(!comparator.apply(element, current.getElement())){
+                this.addElementByPosition(element, pos);
+                return;
+            }
+            pos++;
+            current = current.getNext();
+        }
+    }
+
     private static class LinkedListIterator<T> implements Iterator<T> {
         private ListElement<T> current;
 
         public LinkedListIterator(ListInstance<T> list) {
-            current = list.getHead();
+            current = list.head;
         }
 
         @Override

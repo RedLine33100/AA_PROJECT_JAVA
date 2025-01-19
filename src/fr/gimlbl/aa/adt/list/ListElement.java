@@ -1,6 +1,6 @@
 package fr.gimlbl.aa.adt.list;
 
-public class ListElement <T>{
+class ListElement <T>{
 
     private T element;
     private ListElement<T> next = null;
