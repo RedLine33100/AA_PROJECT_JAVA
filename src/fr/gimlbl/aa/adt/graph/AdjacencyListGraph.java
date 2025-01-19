@@ -5,7 +5,7 @@ import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.ListInstance;
 import fr.gimlbl.aa.adt.list.ReadonlyList;
 
-public class AdjacencyListGraph implements WeightedGraph {
+public class AdjacencyListGraph extends WeightedGraph {
     public static class Builder implements GraphBuilder<AdjacencyListGraph> {
         @Override
         public AdjacencyListGraph createGraph(int vertexCount) {
@@ -100,6 +100,47 @@ public class AdjacencyListGraph implements WeightedGraph {
 
         adjacencyList.getElementByPosition(vertex1).addToTail(edge);
         adjacencyList.getElementByPosition(vertex2).addToTail(edge);
+    }
+
+    @Override
+    public List<Integer> calculateAbrFromVertex(int vertex) {
+        List<Integer> result = new ListInstance<>();
+
+        List<Boolean> inConnectedComponent = new ListInstance<>();
+        List<Integer> toVisit = new ListInstance<>();
+        List<Boolean> visited = new ListInstance<>();
+
+        for (int i = 1; i <= vertexCount; i++) {
+            inConnectedComponent.addToTail(false);
+            visited.addToTail(false);
+        }
+
+        toVisit.addToHead(vertex);
+
+        while (toVisit.size() > 0) {
+            int v = toVisit.getElementByPosition(1);
+            toVisit.removeElementByPosition(1);
+            inConnectedComponent.updateElementByPosition(true, v);
+            visited.updateElementByPosition(true, v);
+            Iterator<Edge> edgeIterator = adjacencyList.getElementByPosition(v).iterator();
+            while (edgeIterator.hasNext()) {
+                int w = edgeIterator.next().getOppositeVertex(v);
+                if (!visited.getElementByPosition(w)) {
+                    toVisit.addToHead(w);
+                }
+            }
+        }
+
+        int i = 1;
+        Iterator<Boolean> iterator = inConnectedComponent.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next()) {
+                result.addToTail(i);
+            }
+            ++i;
+        }
+
+        return result;
     }
 
 }
