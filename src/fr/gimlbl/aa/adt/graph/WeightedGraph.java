@@ -1,6 +1,7 @@
 package fr.gimlbl.aa.adt.graph;
 
 import fr.gimlbl.aa.adt.Iterator;
+import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.LinkedList;
 
@@ -39,15 +40,20 @@ public abstract class WeightedGraph {
     public abstract void addEdge(int vertex1, int vertex2, int weight);
 
     /**
-     * Retourne la liste des elements dans le sous-arbre commencant par le vertex
+     * Return vertex list of the sub tree starting on given vertex
      */
-    public abstract List<Integer> calculateAbrFromVertex(int vertex);
+    public abstract List<Integer> getVerticesInConnectedComponent(int vertex);
+
+    /**
+     * Return edge list of the sub tree starting on given vertex
+     */
+    public abstract List<Edge> getEdgesInConnectedComponent(int vertex);
 
     public boolean isConnexe(){
-        return calculateAbrFromVertex(1).size() == vertexCount();
+        return getVerticesInConnectedComponent(1).size() == vertexCount();
     }
 
-    public List<List<Integer>> getSubConnexeAbr(){
+    public List<List<Integer>> getAllSubComponent(){
         List<Integer> remainCalcul = new LinkedList<>();
         List<List<Integer>> subAbrInstance = new LinkedList<>();
 
@@ -59,7 +65,7 @@ public abstract class WeightedGraph {
 
             int vertex = remainCalcul.getElementByPosition(1);
             remainCalcul.removeElementByPosition(1);
-            List<Integer> pointInAbr = calculateAbrFromVertex(vertex);
+            List<Integer> pointInAbr = getVerticesInConnectedComponent(vertex);
 
 
 
@@ -74,4 +80,35 @@ public abstract class WeightedGraph {
 
         return subAbrInstance;
     }
+
+    public abstract ConnectedComponent getConnectedComponent(int startVertex);
+
+    public List<ConnectedComponent> getAllConnectedComponent(){
+        List<Integer> remainCalcul = new LinkedList<>();
+        List<ConnectedComponent> subAbrInstance = new LinkedList<>();
+
+        for(int i = 1; i <= this.vertexCount(); i++) {
+            remainCalcul.addToTail(i);
+        }
+
+        while(remainCalcul.size() != 0) {
+
+            int vertex = remainCalcul.getElementByPosition(1);
+            remainCalcul.removeElementByPosition(1);
+            ConnectedComponent pointInAbr = getConnectedComponent(vertex);
+
+
+
+            subAbrInstance.addToTail(pointInAbr);
+
+            Iterator<Integer> pointIterator = pointInAbr.getVertexList().iterator();
+            while(pointIterator.hasNext()) {
+                remainCalcul.removeElement(pointIterator.next());
+            }
+
+        }
+
+        return subAbrInstance;
+    }
+
 }

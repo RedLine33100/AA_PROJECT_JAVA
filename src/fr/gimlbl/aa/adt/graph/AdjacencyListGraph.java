@@ -1,5 +1,6 @@
 package fr.gimlbl.aa.adt.graph;
 
+import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.LinkedList;
@@ -103,8 +104,19 @@ public class AdjacencyListGraph extends WeightedGraph {
     }
 
     @Override
-    public List<Integer> calculateAbrFromVertex(int vertex) {
-        List<Integer> result = new LinkedList<>();
+    public List<Integer> getVerticesInConnectedComponent(int vertex) {
+        return getConnectedComponent(vertex).getVertexList();
+    }
+
+    @Override
+    public List<Edge> getEdgesInConnectedComponent(int vertex) {
+        return getConnectedComponent(vertex).getEdgeList();
+    }
+
+    @Override
+    public ConnectedComponent getConnectedComponent(int vertex) {
+        List<Integer> verticesInConnectedComponent = new LinkedList<>();
+        List<Edge> edgesInConnectedComponent = new LinkedList<>();
 
         List<Boolean> inConnectedComponent = new LinkedList<>();
         List<Integer> toVisit = new LinkedList<>();
@@ -124,10 +136,13 @@ public class AdjacencyListGraph extends WeightedGraph {
             visited.updateElementByPosition(true, v);
             Iterator<Edge> edgeIterator = adjacencyList.getElementByPosition(v).iterator();
             while (edgeIterator.hasNext()) {
-                int w = edgeIterator.next().getOppositeVertex(v);
+                Edge edge = edgeIterator.next();
+                int w = edge.getOppositeVertex(v);
                 if (!visited.getElementByPosition(w)) {
                     toVisit.addToHead(w);
                 }
+                if(!edgesInConnectedComponent.hasValue(edge))
+                    edgesInConnectedComponent.addToTail(edge);
             }
         }
 
@@ -135,12 +150,12 @@ public class AdjacencyListGraph extends WeightedGraph {
         Iterator<Boolean> iterator = inConnectedComponent.iterator();
         while (iterator.hasNext()) {
             if (iterator.next()) {
-                result.addToTail(i);
+                verticesInConnectedComponent.addToTail(i);
             }
             ++i;
         }
 
-        return result;
+        return new ConnectedComponent(verticesInConnectedComponent, edgesInConnectedComponent);
     }
 
 }

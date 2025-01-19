@@ -225,13 +225,13 @@ public class LinkedList<T> implements List<T>{
 
         @Override
         public boolean hasNext() {
-            return current != null || previous.getNext() != null;
+            return current != null || (previous != null && previous.getNext() != null);
         }
 
         @Override
         public T next() throws NoSuchElementException {
             if (current == null) {
-                if(previous.getNext() == null){
+                if(previous == null || previous.getNext() == null){
                     throw new NoSuchElementException();
                 }
                 current = previous.getNext();

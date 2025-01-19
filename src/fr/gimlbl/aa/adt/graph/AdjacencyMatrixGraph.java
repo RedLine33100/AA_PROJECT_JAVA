@@ -1,6 +1,7 @@
 package fr.gimlbl.aa.adt.graph;
 
 import fr.gimlbl.aa.adt.Iterator;
+import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.LinkedList;
 
@@ -95,7 +96,7 @@ public class AdjacencyMatrixGraph extends WeightedGraph {
     }
 
     @Override
-    public List<Integer> calculateAbrFromVertex(int startVertex){
+    public List<Integer> getVerticesInConnectedComponent(int startVertex){
         List<Integer> abrPoint = new LinkedList<>();
         abrPoint.addToTail(startVertex);
         Iterator<Integer> pointIterator = abrPoint.iterator();
@@ -116,6 +117,71 @@ public class AdjacencyMatrixGraph extends WeightedGraph {
         }
 
         return abrPoint;
+    }
+
+    @Override
+    public List<Edge> getEdgesInConnectedComponent(int startVertex){
+        List<Edge> edgeList1 = new LinkedList<>();
+        List<Integer> abrPoint = new LinkedList<>();
+
+        abrPoint.addToTail(startVertex);
+
+        Iterator<Integer> pointIterator = abrPoint.iterator();
+        while(pointIterator.hasNext()) {
+
+            Integer vertexPoint = pointIterator.next();
+            List<Edge> listInstance = this.matrix.getElementByPosition(vertexPoint);
+
+            Iterator<Edge> edgeIterator = listInstance.iterator();
+            while(edgeIterator.hasNext()) {
+                Edge edge = edgeIterator.next();
+
+                if(edge.getWeight() == Integer.MAX_VALUE) {
+                    continue;
+                }
+
+                int vertexOpposite = edge.getOppositeVertex(vertexPoint);
+                if(!abrPoint.hasValue(vertexOpposite)) {
+                    abrPoint.addToTail(vertexOpposite);
+                }
+                if(!edgeList1.hasValue(edge))
+                    edgeList1.addToTail(edge);
+            }
+        }
+
+        return edgeList1;
+    }
+
+    public ConnectedComponent getConnectedComponent(int startVertex){
+        List<Edge> edgeList1 = new LinkedList<>();
+        List<Integer> abrPoint = new LinkedList<>();
+
+        abrPoint.addToTail(startVertex);
+
+        Iterator<Integer> pointIterator = abrPoint.iterator();
+        while(pointIterator.hasNext()) {
+
+            Integer vertexPoint = pointIterator.next();
+            List<Edge> listInstance = this.matrix.getElementByPosition(vertexPoint);
+
+            Iterator<Edge> edgeIterator = listInstance.iterator();
+            while(edgeIterator.hasNext()) {
+                Edge edge = edgeIterator.next();
+
+                if(edge.getWeight() == Integer.MAX_VALUE) {
+                    continue;
+                }
+
+                int vertexOpposite = edge.getOppositeVertex(vertexPoint);
+                if(!abrPoint.hasValue(vertexOpposite)) {
+                    abrPoint.addToTail(vertexOpposite);
+                }
+                if(!edgeList1.hasValue(edge))
+                    edgeList1.addToTail(edge);
+            }
+        }
+
+        return new ConnectedComponent(abrPoint, edgeList1);
     }
 
 }
