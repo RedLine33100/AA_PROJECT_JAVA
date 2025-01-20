@@ -1,6 +1,5 @@
-package fr.gimlbl.aa.adt;
+package fr.gimlbl.aa.adt.graph;
 
-import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.list.List;
 
 public class ConnectedComponent {

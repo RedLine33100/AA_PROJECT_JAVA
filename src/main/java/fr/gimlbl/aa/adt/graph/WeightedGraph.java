@@ -1,7 +1,6 @@
 package fr.gimlbl.aa.adt.graph;
 
 import fr.gimlbl.aa.adt.Iterator;
-import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.LinkedList;
 
