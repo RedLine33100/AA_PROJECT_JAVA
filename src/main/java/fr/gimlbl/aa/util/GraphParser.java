@@ -1,4 +1,4 @@
-package fr.gimlbl.aa.kruskal;
+package fr.gimlbl.aa.util;
 
 import fr.gimlbl.aa.adt.graph.WeightedGraph;
 import fr.gimlbl.aa.adt.graph.GraphBuilder;

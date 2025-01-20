@@ -8,7 +8,6 @@ import fr.gimlbl.aa.adt.graph.AdjacencyMatrixGraph;
 import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.list.LinkedList;
 import fr.gimlbl.aa.adt.list.List;
-import fr.gimlbl.aa.kruskal.GraphParser;
 import fr.gimlbl.aa.kruskal.Kruskal;
 
 public class PerformanceTest {

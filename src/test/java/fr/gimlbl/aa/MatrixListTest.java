@@ -3,7 +3,7 @@ package fr.gimlbl.aa;
 import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.graph.AdjacencyListGraph;
 import fr.gimlbl.aa.adt.list.List;
-import fr.gimlbl.aa.kruskal.GraphParser;
+import fr.gimlbl.aa.util.GraphParser;
 import org.junit.Assert;
 import org.junit.Test;
 

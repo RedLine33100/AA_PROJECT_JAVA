@@ -5,7 +5,7 @@ import fr.gimlbl.aa.adt.Pair;
 import fr.gimlbl.aa.adt.graph.AdjacencyListGraph;
 import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.list.List;
-import fr.gimlbl.aa.kruskal.GraphParser;
+import fr.gimlbl.aa.util.GraphParser;
 import fr.gimlbl.aa.kruskal.Kruskal;
 import org.junit.Assert;
 import org.junit.Test;
