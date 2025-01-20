@@ -4,9 +4,8 @@ import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.list.List;
 
 public class ConnectedComponent {
-
-    List<Integer> vertexList;
-    List<Edge> edgeList;
+    private final List<Integer> vertexList;
+    private final List<Edge> edgeList;
 
     public ConnectedComponent(List<Integer> vertexList, List<Edge> edgeList) {
         this.vertexList = vertexList;
