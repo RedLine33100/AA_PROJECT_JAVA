@@ -39,7 +39,7 @@ public class KruskalL {
 
         long st = System.currentTimeMillis();
 
-        Util.printUsage(allAbr, args.length == 3 ? args[2] : null, st - ft);
+        Util.printUsage(allAbr, args.length == 2 ? args[1] : null, st - ft);
     }
 
     public static void main(String[] args) throws IOException {
