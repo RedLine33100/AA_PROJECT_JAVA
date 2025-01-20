@@ -7,7 +7,7 @@ import fr.gimlbl.aa.util.GraphParser;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class MatrixGraphTest {
+public class AdjacencyMatrixGraphTest {
 
     @Test
     public void testVertexCount() {

@@ -6,7 +6,7 @@ import fr.gimlbl.aa.adt.list.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ListTest {
+public class LinkedListTest {
 
     @Test
     public void testSize() {
