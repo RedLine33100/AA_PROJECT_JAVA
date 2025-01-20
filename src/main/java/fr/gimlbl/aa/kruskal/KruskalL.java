@@ -25,10 +25,10 @@ public class KruskalL {
 
         Iterator<ConnectedComponent> iterator = connectedComponentList.iterator();
 
-        List<Pair<List<Edge>, Integer>>allAbr = new LinkedList<>();
+        List<Pair<List<Edge>, Integer>>trees = new LinkedList<>();
 
         while(iterator.hasNext()){
-            allAbr.addToTail(
+            trees.addToTail(
                     Kruskal.kruskal(
                             iterator.next(),
                             new AdjacencyListGraph.Builder(),
@@ -39,7 +39,7 @@ public class KruskalL {
 
         long st = System.currentTimeMillis();
 
-        Util.printUsage(allAbr, args.length == 2 ? args[1] : null, st - ft);
+        Util.printUsage(trees, args.length == 2 ? args[1] : null, st - ft);
     }
 
     public static void main(String[] args) throws IOException {

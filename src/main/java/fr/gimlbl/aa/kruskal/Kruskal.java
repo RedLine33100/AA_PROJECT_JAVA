@@ -1,9 +1,9 @@
 package fr.gimlbl.aa.kruskal;
 
 import fr.gimlbl.aa.adt.Compare;
-import fr.gimlbl.aa.adt.graph.ConnectedComponent;
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.Pair;
+import fr.gimlbl.aa.adt.graph.ConnectedComponent;
 import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.graph.GraphBuilder;
 import fr.gimlbl.aa.adt.graph.WeightedGraph;
@@ -12,8 +12,11 @@ import fr.gimlbl.aa.adt.list.LinkedList;
 
 public class Kruskal {
 
-    public static <G extends WeightedGraph> Pair<List<Edge>, Integer> kruskal(ConnectedComponent connectedComponent, GraphBuilder<G> graphBuilder, int numberVertexGlobal) {
-
+    public static <G extends WeightedGraph> Pair<List<Edge>, Integer> kruskal(
+            ConnectedComponent connectedComponent,
+            GraphBuilder<G> graphBuilder,
+            int globalVertexCount
+    ) {
         List<Edge> edges = connectedComponent.getEdgeList(); // All edges in given subgraph
 
         // Sorting edges
@@ -28,10 +31,10 @@ public class Kruskal {
 
         // Create a new graph
         int totalWeight = 0;
-        G newGraph = graphBuilder.createGraph(numberVertexGlobal);
+        G newGraph = graphBuilder.createGraph(globalVertexCount);
 
         List<Integer> parent = new LinkedList<>();
-        for (int i = 1; i <= numberVertexGlobal; i++) {
+        for (int i = 1; i <= globalVertexCount; i++) {
             parent.addToTail(i);
         }
 
@@ -46,7 +49,7 @@ public class Kruskal {
                 int maxParent = Math.max(firstParent, secondParent);
 
                 // Replace all occurrences of maxParent by minParent
-                for (int x = 1; x <= numberVertexGlobal; x++) {
+                for (int x = 1; x <= globalVertexCount; x++) {
                     if (parent.getElementByPosition(x) == maxParent) {
                         parent.updateElementByPosition(minParent, x);
                     }
