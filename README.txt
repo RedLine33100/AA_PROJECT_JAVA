@@ -38,7 +38,6 @@ Les commandes qui suivent devront être exécutées dans le répertoire du proje
   *listes* d'adjacence ; `KruskalM` pour utiliser un graphe représenté par sa *matrice* d'adjacence
 * `<in>` est le nom du fichier contenant la représentation du graphe sur lequel exécuter l'algorithme de Kruskal.
   Dans le répertoire du projet, nous mettons à disposition des fichiers pour tester le programme.
-* `<s>` est le sommet de départ à partir duquel l'arbre recouvrant de poids minimum est calculé.
 * `<out>` est le nom de fichier où écrire le résultat (facultatif). Si non renseigné, le résultat est affiché dans la
   sortie standard.
 
