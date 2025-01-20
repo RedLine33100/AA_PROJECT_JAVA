@@ -12,6 +12,9 @@ import fr.gimlbl.aa.adt.list.LinkedList;
 
 public class Kruskal {
 
+    /**
+     * Implementation of Kruskal algorithm. Returns a minimal spanning tree for the given connected component.
+     */
     public static <G extends WeightedGraph> Pair<List<Edge>, Integer> kruskal(
             ConnectedComponent connectedComponent,
             GraphBuilder<G> graphBuilder,

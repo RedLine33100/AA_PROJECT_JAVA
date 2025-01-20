@@ -1,9 +1,9 @@
 package fr.gimlbl.aa.kruskal;
 
-import fr.gimlbl.aa.adt.graph.ConnectedComponent;
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.Pair;
 import fr.gimlbl.aa.adt.graph.AdjacencyMatrixGraph;
+import fr.gimlbl.aa.adt.graph.ConnectedComponent;
 import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.list.LinkedList;
 import fr.gimlbl.aa.adt.list.List;
@@ -15,6 +15,13 @@ import java.io.IOException;
 import static fr.gimlbl.aa.util.Util.checkArgs;
 
 public class KruskalM {
+
+    /**
+     * Execution of Kruskal algorithm with an {@link AdjacencyMatrixGraph}.
+     *
+     * @see Kruskal#kruskal
+     * @see KruskalL
+     */
     public static void kruskalM(String[] args) throws IOException {
         AdjacencyMatrixGraph adjacencyMatrixGraph = GraphParser.parse(args[0], new AdjacencyMatrixGraph.Builder());
 

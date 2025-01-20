@@ -16,6 +16,12 @@ import static fr.gimlbl.aa.util.Util.checkArgs;
 
 public class KruskalL {
 
+    /**
+     * Execution of Kruskal algorithm with an {@link AdjacencyListGraph}.
+     *
+     * @see Kruskal#kruskal
+     * @see KruskalM
+     */
     public static void kruskalL(String[] args) throws IOException {
         AdjacencyListGraph adjacencyListGraph = GraphParser.parse(args[0], new AdjacencyListGraph.Builder());
 
