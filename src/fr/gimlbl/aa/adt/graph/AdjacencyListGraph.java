@@ -130,9 +130,8 @@ public class AdjacencyListGraph extends WeightedGraph {
                 int w = edge.getOppositeVertex(v);
                 if (!visited.getElementByPosition(w)) {
                     toVisit.addToHead(w);
-                }
-                if(!edgesInConnectedComponent.hasValue(edge))
                     edgesInConnectedComponent.addToTail(edge);
+                }
             }
         }
 

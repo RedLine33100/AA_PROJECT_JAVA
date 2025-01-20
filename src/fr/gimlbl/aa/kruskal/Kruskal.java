@@ -3,6 +3,7 @@ package fr.gimlbl.aa.kruskal;
 import fr.gimlbl.aa.adt.Compare;
 import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.Iterator;
+import fr.gimlbl.aa.adt.Pair;
 import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.graph.GraphBuilder;
 import fr.gimlbl.aa.adt.graph.WeightedGraph;
@@ -11,7 +12,7 @@ import fr.gimlbl.aa.adt.list.LinkedList;
 
 public class Kruskal {
 
-    public static <G extends WeightedGraph> void kruskal2(ConnectedComponent connectedComponent, GraphBuilder<G> graphBuilder, int numberVertexGlobal) {
+    public static <G extends WeightedGraph> Pair<List<Edge>, Integer> kruskal2(ConnectedComponent connectedComponent, GraphBuilder<G> graphBuilder, int numberVertexGlobal) {
 
         List<Edge> edges = connectedComponent.getEdgeList(); // All edges in given subgraph
 
@@ -56,7 +57,7 @@ public class Kruskal {
                 totalWeight += e.getWeight();
             }
         }
-        System.out.println(totalWeight);
+        return new Pair<>(newGraph.getEdges(), totalWeight);
     }
 
 }

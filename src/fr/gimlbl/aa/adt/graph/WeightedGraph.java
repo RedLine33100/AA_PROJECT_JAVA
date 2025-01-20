@@ -40,7 +40,7 @@ public abstract class WeightedGraph {
     public abstract void addEdge(int vertex1, int vertex2, int weight);
 
     public boolean isConnexe(){
-        return getAllConnectedComponent().size() == vertexCount();
+        return getAllConnectedComponent().size() == 1;
     }
 
     public abstract ConnectedComponent getConnectedComponent(int startVertex);

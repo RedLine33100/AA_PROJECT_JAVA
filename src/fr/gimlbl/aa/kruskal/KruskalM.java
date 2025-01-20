@@ -3,10 +3,9 @@ package fr.gimlbl.aa.kruskal;
 import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.Pair;
-import fr.gimlbl.aa.adt.graph.AdjacencyListGraph;
 import fr.gimlbl.aa.adt.graph.AdjacencyMatrixGraph;
 import fr.gimlbl.aa.adt.graph.Edge;
-import fr.gimlbl.aa.adt.graph.WeightedGraph;
+import fr.gimlbl.aa.adt.list.LinkedList;
 import fr.gimlbl.aa.adt.list.List;
 
 import java.io.IOException;
@@ -20,9 +19,14 @@ public class KruskalM {
         List<ConnectedComponent> connectedComponentList = adjacencyMatrixGraph.getAllConnectedComponent();
 
         Iterator<ConnectedComponent> iterator = connectedComponentList.iterator();
+
+        List<Pair<List<Edge>, Integer>>allAbr = new LinkedList<>();
+
         while(iterator.hasNext()){
-            Kruskal.kruskal2(iterator.next(), new AdjacencyMatrixGraph.Builder(), adjacencyMatrixGraph.vertexCount());
+            allAbr.addToTail(Kruskal.kruskal2(iterator.next(), new AdjacencyMatrixGraph.Builder(), adjacencyMatrixGraph.vertexCount()));
         }
+
+        Util.printUsage(allAbr);
 
     }
 
