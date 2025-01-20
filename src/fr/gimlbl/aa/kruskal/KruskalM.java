@@ -13,7 +13,7 @@ import java.io.IOException;
 import static fr.gimlbl.aa.kruskal.Util.checkArgs;
 
 public class KruskalM {
-    public KruskalM(String[] args) throws IOException {
+    public static void kruskalM(String[] args) throws IOException {
         AdjacencyMatrixGraph adjacencyMatrixGraph = GraphParser.parse(args[0], new AdjacencyMatrixGraph.Builder());
 
         List<ConnectedComponent> connectedComponentList = adjacencyMatrixGraph.getAllConnectedComponent();
@@ -23,7 +23,7 @@ public class KruskalM {
         List<Pair<List<Edge>, Integer>>allAbr = new LinkedList<>();
 
         while(iterator.hasNext()){
-            allAbr.addToTail(Kruskal.kruskal2(iterator.next(), new AdjacencyMatrixGraph.Builder(), adjacencyMatrixGraph.vertexCount()));
+            allAbr.addToTail(Kruskal.kruskal(iterator.next(), new AdjacencyMatrixGraph.Builder(), adjacencyMatrixGraph.vertexCount()));
         }
 
         Util.printUsage(allAbr);
@@ -32,6 +32,6 @@ public class KruskalM {
 
     public static void main(String[] args) throws IOException {
         checkArgs(args);
-        new KruskalM(args);
+        kruskalM(args);
     }
 }

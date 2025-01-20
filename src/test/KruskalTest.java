@@ -19,7 +19,7 @@ public class KruskalTest {
 
             ConnectedComponent connectedComponent = adjacencyListGraph.getConnectedComponent(1);
 
-            Pair<List<Edge>, Integer> pair = Kruskal.kruskal2(connectedComponent, new AdjacencyListGraph.Builder(), adjacencyListGraph.edgeCount());
+            Pair<List<Edge>, Integer> pair = Kruskal.kruskal(connectedComponent, new AdjacencyListGraph.Builder(), adjacencyListGraph.edgeCount());
             Assert.assertEquals((Integer) 181, pair.getSecond());
             Assert.assertEquals(5, pair.getFirst().size());
         } catch (Exception e) {

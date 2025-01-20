@@ -14,8 +14,7 @@ import static fr.gimlbl.aa.kruskal.Util.checkArgs;
 
 public class KruskalL {
 
-    public KruskalL(String[] args) throws IOException {
-
+    public static void kruskalL(String[] args) throws IOException {
         AdjacencyListGraph adjacencyListGraph = GraphParser.parse(args[0], new AdjacencyListGraph.Builder());
 
         List<ConnectedComponent> connectedComponentList = adjacencyListGraph.getAllConnectedComponent();
@@ -25,7 +24,7 @@ public class KruskalL {
         List<Pair<List<Edge>, Integer>>allAbr = new LinkedList<>();
 
         while(iterator.hasNext()){
-            allAbr.addToTail(Kruskal.kruskal2(iterator.next(), new AdjacencyListGraph.Builder(), adjacencyListGraph.vertexCount()));
+            allAbr.addToTail(Kruskal.kruskal(iterator.next(), new AdjacencyListGraph.Builder(), adjacencyListGraph.vertexCount()));
         }
 
         Util.printUsage(allAbr);
@@ -34,6 +33,6 @@ public class KruskalL {
 
     public static void main(String[] args) throws IOException {
         checkArgs(args);
-        new KruskalL(args);
+        kruskalL(args);
     }
 }

@@ -12,7 +12,7 @@ import fr.gimlbl.aa.adt.list.LinkedList;
 
 public class Kruskal {
 
-    public static <G extends WeightedGraph> Pair<List<Edge>, Integer> kruskal2(ConnectedComponent connectedComponent, GraphBuilder<G> graphBuilder, int numberVertexGlobal) {
+    public static <G extends WeightedGraph> Pair<List<Edge>, Integer> kruskal(ConnectedComponent connectedComponent, GraphBuilder<G> graphBuilder, int numberVertexGlobal) {
 
         List<Edge> edges = connectedComponent.getEdgeList(); // All edges in given subgraph
 

@@ -94,7 +94,7 @@ public class MatrixGraphTest {
         try {
             AdjacencyMatrixGraph adjacencyMatrixGraph = GraphParser.parse("testfilenc3abr.txt", new AdjacencyMatrixGraph.Builder());
 
-            Assert.assertFalse(adjacencyMatrixGraph.isConnexe());
+            Assert.assertFalse(adjacencyMatrixGraph.isConnected());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -102,7 +102,7 @@ public class MatrixGraphTest {
         try {
             AdjacencyMatrixGraph adjacencyMatrixGraph = GraphParser.parse("testfileconnexe.txt", new AdjacencyMatrixGraph.Builder());
 
-            Assert.assertTrue(adjacencyMatrixGraph.isConnexe());
+            Assert.assertTrue(adjacencyMatrixGraph.isConnected());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
