@@ -91,6 +91,8 @@ public class PerformanceTest {
                 System.out.println("Sum elapsed time for list: "+sumTimeList+" ms");
             }
 
+            System.out.println("-----");
+
         }
 
         System.out.println("Total time for matrix: "+sumTimeMatrix+" ms");
