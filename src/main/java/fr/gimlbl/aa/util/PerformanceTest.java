@@ -20,10 +20,15 @@ public class PerformanceTest {
         List<Integer> integerList = new LinkedList<>();
         integerList.addToTail(5);
         integerList.addToTail(10);
+        integerList.addToTail(15);
         integerList.addToTail(20);
+        integerList.addToTail(25);
+        integerList.addToTail(30);
         integerList.addToTail(50);
         integerList.addToTail(100);
+        integerList.addToTail(150);
         integerList.addToTail(200);
+        integerList.addToTail(250);
 
         List<Integer> averageList = new LinkedList<>();
         averageList.addToTail(10);
@@ -52,11 +57,11 @@ public class PerformanceTest {
             String graph = GraphGenerator.generateRandomGraph(args);
 
 
-            System.out.println("Graph test: number vertices: "+numberVertices+" avg: "+average+" graph:"+graph);
+            System.out.println("Graph test: number vertices: "+numberVertices+" avg: "+average);
 
             {
                 AdjacencyMatrixGraph adjacencyMatrixGraph = GraphParser.parseString(graph, new AdjacencyMatrixGraph.Builder());
-                long startTime = System.currentTimeMillis();
+                long startTime = System.nanoTime();
                 List<ConnectedComponent> connectedComponentList = adjacencyMatrixGraph.getAllConnectedComponent();
 
                 Iterator<ConnectedComponent> componentIterator = connectedComponentList.iterator();
@@ -66,15 +71,15 @@ public class PerformanceTest {
                 while (componentIterator.hasNext()) {
                     allAbr.addToTail(Kruskal.kruskal(componentIterator.next(), new AdjacencyMatrixGraph.Builder(), adjacencyMatrixGraph.vertexCount()));
                 }
-                long endTime = System.currentTimeMillis();
+                long endTime = System.nanoTime();
                 long elapsedTime = endTime - startTime;
-                System.out.println("Elapsed time for matrix: "+elapsedTime+" ms");
+                System.out.println("Elapsed time for matrix: "+elapsedTime+" ns");
                 sumTimeMatrix+=elapsedTime;
-                System.out.println("Sum elapsed time for matrix: "+sumTimeMatrix+" ms");
+                System.out.println("Sum elapsed time for matrix: "+sumTimeMatrix+" ns");
             }
             {
                 AdjacencyListGraph adjacencyListGraph = GraphParser.parseString(graph, new AdjacencyListGraph.Builder());
-                long startTime = System.currentTimeMillis();
+                long startTime = System.nanoTime();
                 List<ConnectedComponent> connectedComponentList = adjacencyListGraph.getAllConnectedComponent();
 
                 Iterator<ConnectedComponent> componentIterator = connectedComponentList.iterator();
@@ -84,19 +89,19 @@ public class PerformanceTest {
                 while (componentIterator.hasNext()) {
                     allAbr.addToTail(Kruskal.kruskal(componentIterator.next(), new AdjacencyListGraph.Builder(), adjacencyListGraph.vertexCount()));
                 }
-                long endTime = System.currentTimeMillis();
+                long endTime = System.nanoTime();
                 long elapsedTime = endTime - startTime;
-                System.out.println("Elapsed time for list: "+elapsedTime+" ms");
+                System.out.println("Elapsed time for list: "+elapsedTime+" ns");
                 sumTimeList += elapsedTime;
-                System.out.println("Sum elapsed time for list: "+sumTimeList+" ms");
+                System.out.println("Sum elapsed time for list: "+sumTimeList+" ns");
             }
 
             System.out.println("-----");
 
         }
 
-        System.out.println("Total time for matrix: "+sumTimeMatrix+" ms");
-        System.out.println("Total time for list: "+sumTimeList+" ms");
+        System.out.println("Total time for matrix: "+sumTimeMatrix+" ns");
+        System.out.println("Total time for list: "+sumTimeList+" ns");
 
         System.out.println("====================");
     }
