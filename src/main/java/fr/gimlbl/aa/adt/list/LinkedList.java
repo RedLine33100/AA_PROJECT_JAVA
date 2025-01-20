@@ -5,7 +5,12 @@ import fr.gimlbl.aa.adt.Iterator;
 
 import java.util.NoSuchElementException;
 
-public class LinkedList<T> implements List<T>{
+/**
+ * A doubly-linked list. Each {@link ListElement} has a reference to the next element and the previous element of the
+ * list.
+ * @param <T> Type of elements in the list
+ */
+public class LinkedList<T> implements List<T> {
 
     private ListElement<T> head;
     private ListElement<T> tail;
