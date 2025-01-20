@@ -1,0 +1,16 @@
+LE GRAPHE N'EST PAS CONNEXE
+Coût Arbre 1: 53 Arbre 2: 11 Arbre 3: 0
+Arbre 1) 
+     (1 -> 2 : 16)
+     (2 -> 6 : 15)
+     (4 -> 6 : 10)
+     (4 -> 10 : 12)
+
+Arbre 2) 
+     (3 -> 9 : 4)
+     (5 -> 8 : 2)
+     (5 -> 9 : 5)
+
+Arbre 3) 
+
+Temps d'execution: 59ms environ 0sec

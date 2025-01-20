@@ -7,14 +7,16 @@ import fr.gimlbl.aa.adt.graph.AdjacencyListGraph;
 import fr.gimlbl.aa.adt.graph.Edge;
 import fr.gimlbl.aa.adt.list.LinkedList;
 import fr.gimlbl.aa.adt.list.List;
+import fr.gimlbl.aa.util.Util;
 
 import java.io.IOException;
 
-import static fr.gimlbl.aa.kruskal.Util.checkArgs;
+import static fr.gimlbl.aa.util.Util.checkArgs;
 
 public class KruskalL {
 
     public static void kruskalL(String[] args) throws IOException {
+        long ft = System.currentTimeMillis();
         AdjacencyListGraph adjacencyListGraph = GraphParser.parse(args[0], new AdjacencyListGraph.Builder());
 
         List<ConnectedComponent> connectedComponentList = adjacencyListGraph.getAllConnectedComponent();
@@ -27,7 +29,9 @@ public class KruskalL {
             allAbr.addToTail(Kruskal.kruskal(iterator.next(), new AdjacencyListGraph.Builder(), adjacencyListGraph.vertexCount()));
         }
 
-        Util.printUsage(allAbr);
+        long st = System.currentTimeMillis();
+
+        Util.printUsage(allAbr, args.length == 3 ? args[2] : null, st-ft);
 
     }
 
