@@ -1,7 +1,6 @@
 package fr.gimlbl.aa.adt.graph;
 
 import fr.gimlbl.aa.adt.Iterator;
-import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.LinkedList;
 
@@ -95,37 +94,34 @@ public class AdjacencyMatrixGraph extends WeightedGraph {
         return incidentEdges;
     }
 
+    @Override
+    public ConnectedComponent getConnectedComponent(int startVertex) {
+        List<Edge> edgesInCC = new LinkedList<>();        // Edges in Connected Component
+        List<Integer> verticesInCC = new LinkedList<>();  // Vertices in Connected Component
 
-    public ConnectedComponent getConnectedComponent(int startVertex){
-        List<Edge> edgeList1 = new LinkedList<>();
-        List<Integer> abrPoint = new LinkedList<>();
+        verticesInCC.addToTail(startVertex);
 
-        abrPoint.addToTail(startVertex);
+        Iterator<Integer> vertexIterator = verticesInCC.iterator();
+        while(vertexIterator.hasNext()) {
+            Integer vertexPoint = vertexIterator.next();
+            List<Edge> edges = this.matrix.getElementByPosition(vertexPoint);
 
-        Iterator<Integer> pointIterator = abrPoint.iterator();
-        while(pointIterator.hasNext()) {
-
-            Integer vertexPoint = pointIterator.next();
-            List<Edge> listInstance = this.matrix.getElementByPosition(vertexPoint);
-
-            Iterator<Edge> edgeIterator = listInstance.iterator();
+            Iterator<Edge> edgeIterator = edges.iterator();
             while(edgeIterator.hasNext()) {
                 Edge edge = edgeIterator.next();
 
-                if(edge.getWeight() == Integer.MAX_VALUE) {
-                    continue;
+                if (edge.getWeight() != Integer.MAX_VALUE) {
+                    int oppositeVertex = edge.getOppositeVertex(vertexPoint);
+                    if (!verticesInCC.hasValue(oppositeVertex)) {
+                        verticesInCC.addToTail(oppositeVertex);
+                    }
+                    if (!edgesInCC.hasValue(edge)) {
+                        edgesInCC.addToTail(edge);
+                    }
                 }
-
-                int vertexOpposite = edge.getOppositeVertex(vertexPoint);
-                if(!abrPoint.hasValue(vertexOpposite)) {
-                    abrPoint.addToTail(vertexOpposite);
-                }
-                if(!edgeList1.hasValue(edge))
-                    edgeList1.addToTail(edge);
             }
         }
 
-        return new ConnectedComponent(abrPoint, edgeList1);
+        return new ConnectedComponent(verticesInCC, edgesInCC);
     }
-
 }

@@ -1,7 +1,6 @@
 package fr.gimlbl.aa.adt.graph;
 
 import fr.gimlbl.aa.adt.Iterator;
-import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.adt.list.LinkedList;
 
@@ -39,38 +38,43 @@ public abstract class WeightedGraph {
      */
     public abstract void addEdge(int vertex1, int vertex2, int weight);
 
-    public boolean isConnected(){
+    /**
+     * Returns true if the graph is connected, false if it contains several connected components.
+     */
+    public boolean isConnected() {
         return getAllConnectedComponent().size() == 1;
     }
 
+    /**
+     * Returns the connected component which contains the given vertex.
+     */
     public abstract ConnectedComponent getConnectedComponent(int startVertex);
 
-    public List<ConnectedComponent> getAllConnectedComponent(){
-        List<Integer> remainCalcul = new LinkedList<>();
-        List<ConnectedComponent> subAbrInstance = new LinkedList<>();
+    /**
+     * Computes all connected components in the graph.
+     */
+    public List<ConnectedComponent> getAllConnectedComponent() {
+        List<Integer> remainingVertices = new LinkedList<>();
+        List<ConnectedComponent> connectedComponents = new LinkedList<>();
 
-        for(int i = 1; i <= this.vertexCount(); i++) {
-            remainCalcul.addToTail(i);
+        for (int i = 1; i <= this.vertexCount(); i++) {
+            remainingVertices.addToTail(i);
         }
 
-        while(remainCalcul.size() != 0) {
+        while (remainingVertices.size() != 0) {
+            int vertex = remainingVertices.getElementByPosition(1);
+            remainingVertices.removeElementByPosition(1);
+            ConnectedComponent cc = getConnectedComponent(vertex);
 
-            int vertex = remainCalcul.getElementByPosition(1);
-            remainCalcul.removeElementByPosition(1);
-            ConnectedComponent pointInAbr = getConnectedComponent(vertex);
+            connectedComponents.addToTail(cc);
 
-
-
-            subAbrInstance.addToTail(pointInAbr);
-
-            Iterator<Integer> pointIterator = pointInAbr.getVertexList().iterator();
-            while(pointIterator.hasNext()) {
-                remainCalcul.removeElement(pointIterator.next());
+            Iterator<Integer> vertexIterator = cc.getVertexList().iterator();
+            while (vertexIterator.hasNext()) {
+                remainingVertices.removeElement(vertexIterator.next());
             }
-
         }
 
-        return subAbrInstance;
+        return connectedComponents;
     }
 
 }

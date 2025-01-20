@@ -1,6 +1,6 @@
 package fr.gimlbl.aa.kruskal;
 
-import fr.gimlbl.aa.adt.ConnectedComponent;
+import fr.gimlbl.aa.adt.graph.ConnectedComponent;
 import fr.gimlbl.aa.adt.Iterator;
 import fr.gimlbl.aa.adt.Pair;
 import fr.gimlbl.aa.adt.graph.AdjacencyListGraph;

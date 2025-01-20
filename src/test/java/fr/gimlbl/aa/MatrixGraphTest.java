@@ -1,6 +1,6 @@
 package fr.gimlbl.aa;
 
-import fr.gimlbl.aa.adt.ConnectedComponent;
+import fr.gimlbl.aa.adt.graph.ConnectedComponent;
 import fr.gimlbl.aa.adt.graph.AdjacencyMatrixGraph;
 import fr.gimlbl.aa.adt.list.List;
 import fr.gimlbl.aa.util.GraphParser;

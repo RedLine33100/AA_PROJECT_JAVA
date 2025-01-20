@@ -24,20 +24,23 @@ Les commandes qui suivent devront être exécutées dans le répertoire du proje
     mvn compile
 
 
-## Exécuter les tests unitaires (JUnit 4):
+## Exécuter les tests unitaires (JUnit 4)
 
     mvn test
 
 
-## Exécuter le programme : Saisir la commande suivante :
+## Exécuter le programme
 
-    java -classpath target/classes fr.gimlbl.aa.kruskal.<Kruskal> <in> <s> <out>
+    java -classpath target/classes fr.gimlbl.aa.kruskal.<Kruskal> <in> <out>
 
 ...où les éléments suivants doivent être renseignés :
 * `<Kruskal>` est le nom de la classe principale à exécuter : `KruskalL` pour utiliser un graphe représenté par ses
   *listes* d'adjacence ; `KruskalM` pour utiliser un graphe représenté par sa *matrice* d'adjacence
 * `<in>` est le nom du fichier contenant la représentation du graphe sur lequel exécuter l'algorithme de Kruskal.
   Dans le répertoire du projet, nous mettons à disposition des fichiers pour tester le programme.
-* `<s>` est le sommet de départ à partir duquel l'arbre recouvrant de poids minimum est calculé.
 * `<out>` est le nom de fichier où écrire le résultat (facultatif). Si non renseigné, le résultat est affiché dans la
   sortie standard.
+
+## Exécuter le test de performances
+
+    java -classpath target/classes fr.gimlbl.aa.util.PerformanceTest
