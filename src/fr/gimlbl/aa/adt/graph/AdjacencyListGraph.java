@@ -104,16 +104,6 @@ public class AdjacencyListGraph extends WeightedGraph {
     }
 
     @Override
-    public List<Integer> getVerticesInConnectedComponent(int vertex) {
-        return getConnectedComponent(vertex).getVertexList();
-    }
-
-    @Override
-    public List<Edge> getEdgesInConnectedComponent(int vertex) {
-        return getConnectedComponent(vertex).getEdgeList();
-    }
-
-    @Override
     public ConnectedComponent getConnectedComponent(int vertex) {
         List<Integer> verticesInConnectedComponent = new LinkedList<>();
         List<Edge> edgesInConnectedComponent = new LinkedList<>();

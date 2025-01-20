@@ -39,46 +39,8 @@ public abstract class WeightedGraph {
      */
     public abstract void addEdge(int vertex1, int vertex2, int weight);
 
-    /**
-     * Return vertex list of the sub tree starting on given vertex
-     */
-    public abstract List<Integer> getVerticesInConnectedComponent(int vertex);
-
-    /**
-     * Return edge list of the sub tree starting on given vertex
-     */
-    public abstract List<Edge> getEdgesInConnectedComponent(int vertex);
-
     public boolean isConnexe(){
-        return getVerticesInConnectedComponent(1).size() == vertexCount();
-    }
-
-    public List<List<Integer>> getAllSubComponent(){
-        List<Integer> remainCalcul = new LinkedList<>();
-        List<List<Integer>> subAbrInstance = new LinkedList<>();
-
-        for(int i = 1; i <= this.vertexCount(); i++) {
-            remainCalcul.addToTail(i);
-        }
-
-        while(remainCalcul.size() != 0) {
-
-            int vertex = remainCalcul.getElementByPosition(1);
-            remainCalcul.removeElementByPosition(1);
-            List<Integer> pointInAbr = getVerticesInConnectedComponent(vertex);
-
-
-
-            subAbrInstance.addToTail(pointInAbr);
-
-            Iterator<Integer> pointIterator = pointInAbr.iterator();
-            while(pointIterator.hasNext()) {
-                remainCalcul.removeElement(pointIterator.next());
-            }
-
-        }
-
-        return subAbrInstance;
+        return getAllConnectedComponent().size() == vertexCount();
     }
 
     public abstract ConnectedComponent getConnectedComponent(int startVertex);

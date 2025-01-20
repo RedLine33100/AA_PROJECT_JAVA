@@ -95,62 +95,6 @@ public class AdjacencyMatrixGraph extends WeightedGraph {
         return incidentEdges;
     }
 
-    @Override
-    public List<Integer> getVerticesInConnectedComponent(int startVertex){
-        List<Integer> abrPoint = new LinkedList<>();
-        abrPoint.addToTail(startVertex);
-        Iterator<Integer> pointIterator = abrPoint.iterator();
-        while(pointIterator.hasNext()) {
-            Integer vertexPoint = pointIterator.next();
-            List<Edge> listInstance = this.matrix.getElementByPosition(vertexPoint);
-            Iterator<Edge> edgeIterator = listInstance.iterator();
-
-            while(edgeIterator.hasNext()) {
-                Edge edge = edgeIterator.next();
-                int vertexOpposite = edge.getOppositeVertex(vertexPoint);
-                if(edge.getWeight() != Integer.MAX_VALUE) {
-                    if(!abrPoint.hasValue(vertexOpposite)) {
-                        abrPoint.addToTail(vertexOpposite);
-                    }
-                }
-            }
-        }
-
-        return abrPoint;
-    }
-
-    @Override
-    public List<Edge> getEdgesInConnectedComponent(int startVertex){
-        List<Edge> edgeList1 = new LinkedList<>();
-        List<Integer> abrPoint = new LinkedList<>();
-
-        abrPoint.addToTail(startVertex);
-
-        Iterator<Integer> pointIterator = abrPoint.iterator();
-        while(pointIterator.hasNext()) {
-
-            Integer vertexPoint = pointIterator.next();
-            List<Edge> listInstance = this.matrix.getElementByPosition(vertexPoint);
-
-            Iterator<Edge> edgeIterator = listInstance.iterator();
-            while(edgeIterator.hasNext()) {
-                Edge edge = edgeIterator.next();
-
-                if(edge.getWeight() == Integer.MAX_VALUE) {
-                    continue;
-                }
-
-                int vertexOpposite = edge.getOppositeVertex(vertexPoint);
-                if(!abrPoint.hasValue(vertexOpposite)) {
-                    abrPoint.addToTail(vertexOpposite);
-                }
-                if(!edgeList1.hasValue(edge))
-                    edgeList1.addToTail(edge);
-            }
-        }
-
-        return edgeList1;
-    }
 
     public ConnectedComponent getConnectedComponent(int startVertex){
         List<Edge> edgeList1 = new LinkedList<>();
