@@ -1,4 +1,4 @@
-package test;
+package fr.gimlbl.aa;
 
 import fr.gimlbl.aa.adt.ConnectedComponent;
 import fr.gimlbl.aa.adt.Pair;
